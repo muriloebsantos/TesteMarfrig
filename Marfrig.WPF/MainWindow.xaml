@@ -1,0 +1,30 @@
+﻿<mah:MetroWindow x:Class="Marfrig.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Marfrig.WPF"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="Marfrig" Height="450" Width="800"
+        WindowState="Maximized" BorderBrush="{DynamicResource AccentColorBrush}">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Menu Grid.Row="0">
+            <MenuItem Header="Compra de Gado">
+                <MenuItem x:Name="menuNovaConsultaCompraGado" Header="Consultar" Click="menuNovaConsultaCompraGado_Click"/>
+                <MenuItem x:Name="menuNovaCompraGado" Header="Cadastrar" Click="menuNovaCompraGado_Click"/>
+            </MenuItem>
+
+        </Menu>
+
+        <mah:MetroTabControl x:Name="tabControlTelas" Grid.Row="1" mah:TabControlHelper.IsUnderlined="True" />
+
+
+    </Grid>
+</mah:MetroWindow>

@@ -1,12 +1,12 @@
 ﻿using Marfrig.Domain.Entities;
 using Marfrig.Domain.Interfaces.Repositories;
-using Marfrig.Domain.Models;
 using Marfrig.Infra.Data.DbContexts;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using Marfrig.Domain.Models.ReadModels;
+using Marfrig.Domain.Models;
 
 namespace Marfrig.Infra.Data.Repositories
 {
@@ -19,24 +19,101 @@ namespace Marfrig.Infra.Data.Repositories
             dbContext = new MarfrigDbContext();
         }
 
-        public Task Atualizar(CompraGado compraGado)
+        public async Task Atualizar(CompraGado compraGado)
         {
-            throw new NotImplementedException();
+            var itensAntesDeSalvar = dbContext.ComprasGadoItem.Where(i => i.CompraGadoId == compraGado.Id).ToList();
+            var codigosItensAtualizar = compraGado.CompraGadoItens.Select(i => i.Id).ToList();
+            var itensExcluir = itensAntesDeSalvar.Where(i => !codigosItensAtualizar.Contains(i.Id));
+            var compraAtualizar = dbContext.ComprasGado.Find(compraGado.Id);
+
+            foreach (var item in compraGado.CompraGadoItens)
+            {
+                if (item.Id == 0)
+                    dbContext.ComprasGadoItem.Add(item);
+                else
+                {
+                    var itemAtualizar = itensAntesDeSalvar.FirstOrDefault(i => i.Id == item.Id);
+                    dbContext.Entry(itemAtualizar).CurrentValues.SetValues(item);
+                }
+                
+            }
+
+            foreach (var itemExcluir in itensExcluir)
+                dbContext.Entry(itemExcluir).State = EntityState.Deleted;
+
+            dbContext.Entry(compraAtualizar).CurrentValues.SetValues(compraGado);
+
+            await dbContext.SaveChangesAsync();
         }
 
-        public Task<PagingResult<CompraGado>> Buscar(FilterOptions options, int id, int pecuaristaId, DateTime dataEntregaInicio, DateTime dataEntregaFim)
+        public async Task<PagedResult<CompraGadoConsulta>> Buscar(FilterOptions options, int id, int pecuaristaId, DateTime? dataEntregaInicio, DateTime? dataEntregaFim)
         {
-            throw new NotImplementedException();
+            var query = dbContext.ComprasGadoItem.AsQueryable();
+            var buscarPorId = id > 0;
+
+            if (!buscarPorId)
+            {
+                if (pecuaristaId > 0)
+                    query = query.Where(q => q.CompraGado.PecuaristaId == pecuaristaId);
+
+                if (dataEntregaInicio != null)
+                    query = query.Where(q => q.CompraGado.DataEntrega >= dataEntregaInicio);
+
+                if (dataEntregaFim != null)
+                    query = query.Where(q => q.CompraGado.DataEntrega <= dataEntregaFim);
+            }
+            else
+            {
+                query = query.Where(q => q.CompraGado.Id == id);
+            }
+
+            var agrupamento = query.GroupBy(g => new
+            {
+                Id = g.CompraGadoId,
+                Data = g.CompraGado.DataEntrega,
+                Pecuarista = g.CompraGado.Pecuarista.Nome,
+                g.CompraGado.Impressa
+            });
+
+            var qtdeRegistros = await agrupamento.CountAsync();
+
+            var registros = await agrupamento
+                                     .OrderBy(q => q.Key.Id)
+                                     .Skip(options.Skip)
+                                     .Take(options.PageSize)
+                                     .Select(g => new CompraGadoConsulta
+                                     {
+                                         Id = g.Key.Id,
+                                         Data = g.Key.Data,
+                                         Pecuarista = g.Key.Pecuarista,
+                                         Impressa = g.Key.Impressa,
+                                         ValorTotal = g.Sum(s => s.Quantidade * s.Preco)
+                                     })
+                                     .ToListAsync();
+
+            var pagedResult = new PagedResult<CompraGadoConsulta>
+            {
+                CurrentPage = options.CurrentPage,
+                PageSize = options.PageSize,
+                TotalRecords = qtdeRegistros,
+                Data = registros
+            };
+            
+            return pagedResult;
         }
 
-        public Task<CompraGado> BuscarPorId(int id)
+        public async Task<CompraGado> BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return await dbContext.ComprasGado
+                                  .Include(a => a.CompraGadoItens)
+                                  .FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public Task Excluir(int id)
+        public async Task Excluir(int id)
         {
-            throw new NotImplementedException();
+            var compraGado = await dbContext.ComprasGado.FindAsync(id);
+            dbContext.ComprasGado.Remove(compraGado);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task Inserir(CompraGado compraGado)

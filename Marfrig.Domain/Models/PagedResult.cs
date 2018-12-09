@@ -1,9 +1,8 @@
-﻿using Marfrig.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Marfrig.Domain.Models
 {
-    public class PagingResult<T> where T : DomainEntity
+    public class PagedResult<T> where T : class
     {
         public int CurrentPage { get; set; }
         public int TotalRecords { get; set; }
@@ -14,7 +13,7 @@ namespace Marfrig.Domain.Models
             {
                 var restoDivisao = TotalRecords % PageSize;
                 var divisao = TotalRecords / PageSize;
-                var qtdePaginas = divisao + restoDivisao;
+                var qtdePaginas = divisao + (restoDivisao > 0 ? 1 : 0);
                 return qtdePaginas;
             }
         }

@@ -2,14 +2,8 @@
 {
     public class FilterOptions
     {
-        public int CurrentPage { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
-        public int Skip
-        {
-            get
-            {
-                return (CurrentPage * PageSize) - PageSize;
-            }
-        }
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int Skip => (CurrentPage * PageSize) - PageSize;
     }
 }

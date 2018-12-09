@@ -4,6 +4,7 @@ using Marfrig.Infra.Data.DbContexts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Marfrig.Infra.Data.Repositories
 {
@@ -16,12 +17,14 @@ namespace Marfrig.Infra.Data.Repositories
             dbContext = new MarfrigDbContext();
         }
 
+        public async Task<bool> Existe(int id)
+        {
+            return await dbContext.Pecuaristas.AnyAsync(p => p.Id == id);
+        }
+
         public async Task<IEnumerable<Pecuarista>> ObterPecuaristas()
         {
-            return await Task.Run(() =>
-            {
-                return dbContext.Pecuaristas.OrderBy(p => p.Nome).ToList();
-            });
+            return await dbContext.Pecuaristas.OrderBy(p => p.Nome).ToListAsync();
         }
     }
 }

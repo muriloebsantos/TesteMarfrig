@@ -1,0 +1,92 @@
+﻿<Page x:Class="Marfrig.WPF.CompraGadoConsultaPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:local="clr-namespace:Marfrig.WPF"
+      xmlns:vm="clr-namespace:Marfrig.WPF.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" Margin="10, 0, 10, 10"
+      Title="CompraGadoConsultaPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <mah:ProgressRing x:Name="progressRing" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Panel.ZIndex="9999" Width="100" />
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Content="Imprimir" Width="100" Height="30" Margin="0,0,5,0"
+                    IsEnabled="{Binding ImprimirEnabled}"/>
+            <Button x:Name="btnAdicionar" Content="Adicionar" Width="100" Height="30" Margin="0,0,5,0"
+                    Click="btnAdicionar_Click"/>
+            <Button x:Name="btnAlterar" Content="Alterar" Width="100" Height="30" Margin="0,0,5,0"
+                    IsEnabled="{Binding AlterarEnabled}" Click="btnAlterar_Click"/>
+            <Button x:Name="btnExcluir" Content="Excluir" Width="100" Height="30" Margin="0,0,5,0"
+                    IsEnabled="{Binding ExcluirEnabled}"
+                    Click="btnExcluir_Click"/>
+        </StackPanel>
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="20*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Id" Margin="90,0,0,0"/>
+            <TextBox Grid.Row="0" Grid.Column="0" Margin="120,0,0,5" 
+                     Text="{Binding Id, Mode=TwoWay, TargetNullValue=''}"/>
+
+            <Label Grid.Row="0" Grid.Column="1" Content="Pecuarista" />
+            <ComboBox Grid.Row="0" Grid.Column="1" Margin="60,0,0,5"
+                     ItemsSource="{Binding Pecuaristas}" SelectedValuePath="Id" DisplayMemberPath="Nome"
+                     SelectedValue="{Binding PecuaristaId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Data de entrega de" />
+            <TextBox Grid.Row="1" Grid.Column="0" Margin="120,5,0,0"
+                     Text="{Binding DataInicio, Mode=TwoWay, StringFormat=dd/MM/yyyy, ConverterCulture=pt-BR, TargetNullValue=''}"/>
+
+            <Label Grid.Row="1" Grid.Column="1" Content="Até" Margin="30,0,0,0"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="60,5,0,0"
+                     Text="{Binding DataFim, Mode=TwoWay, StringFormat=dd/MM/yyyy, ConverterCulture=pt-BR, TargetNullValue=''}"/>
+
+            <Button x:Name="btnPesquisar" Grid.Row="2" Content="Pesquisar" Grid.ColumnSpan="2" Width="100" HorizontalAlignment="Center" 
+                                 Margin="0,5,0,0" Click="btnPesquisar_Click"/>
+
+        </Grid>
+        
+      
+            <DataGrid Grid.Row="2" BorderThickness="1" Margin="0,10,0,10" GridLinesVisibility="All"
+                      AutoGenerateColumns="False" CanUserAddRows="False"
+                      ItemsSource="{Binding ComprasGado}" SelectedItem="{Binding CompraGadoSelecionada}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Width="100" Binding="{Binding Id}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Pecuarista"  Width="*" Binding="{Binding Pecuarista}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Data Entrega" Width="150" Binding="{Binding Data, StringFormat=dd/MM/yyyy}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Valor Total" Width="150" Binding="{Binding ValorTotal, StringFormat=n2, ConverterCulture=pt-BR}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Impressa" Width="80" Binding="{Binding Impressa}" IsReadOnly="True" />
+            </DataGrid.Columns>
+            </DataGrid>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label Content="Página:" VerticalAlignment="Center"/>
+            <ComboBox Height="30" Margin="0,0,10,0"
+                      ItemsSource="{Binding Paginas}"
+                      SelectedValue="{Binding PaginaAtual, Mode=TwoWay}"/>
+            <Button x:Name="btnAnterior" Content="Anterior" Height="30" Width="80" Margin="0,0,10,0"
+                    IsEnabled="{Binding AnteriorEnabled}" Click="btnAnterior_Click"/>
+            <Button x:Name="btnProximo" Content="Próxima" Height="30" Width="80"
+                    IsEnabled="{Binding ProximoEnabled}" Click="btnProximo_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

@@ -8,9 +8,9 @@ namespace Marfrig.Domain.Services
 {
     public class CompraGadoService : ICompraGadoService
     {
-        public readonly ICompraGadoRepository compraGadoRepository;
-
-        public CompraGadoService(ICompraGadoRepository compraGadoRepository)
+        private readonly ICompraGadoRepository compraGadoRepository;
+  
+        public CompraGadoService(ICompraGadoRepository compraGadoRepository, IAnimalRepository animalRepository)
         {
             this.compraGadoRepository = compraGadoRepository;
         }
@@ -23,6 +23,25 @@ namespace Marfrig.Domain.Services
             await compraGadoRepository.Inserir(compraGado);
 
             return compraGado.Id;
+        }
+
+        public async Task<int> AtualizarCompraDeGado(CompraGado compraGado)
+        {
+            if (!compraGado.PodeSalvar())
+                throw new EntityValidationException(compraGado.Validacoes);
+
+            await compraGadoRepository.Atualizar(compraGado);
+
+            return compraGado.Id;
+        }
+
+        public async Task<bool> Excluir(CompraGado compraGado)
+        {
+            if (compraGado.Impressa)
+                return false;
+
+            await compraGadoRepository.Excluir(compraGado.Id);
+            return true;
         }
     }
 }

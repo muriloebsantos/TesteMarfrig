@@ -54,10 +54,7 @@
     <Compile Include="AppServices\AnimalAppService.cs" />
     <Compile Include="AppServices\CompraGadoAppService.cs" />
     <Compile Include="AppServices\PecuaristaAppService.cs" />
-    <Compile Include="DTOs\Animais\AnimalDTO.cs" />
-    <Compile Include="DTOs\ComprasGado\CompraGadoInputDTO.cs" />
-    <Compile Include="DTOs\ComprasGado\CompraGadoItemInputDTO.cs" />
-    <Compile Include="DTOs\Pecuaristas\PecuaristaDTO.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Interfaces\IAnimalAppService.cs" />
     <Compile Include="Interfaces\ICompraGadoAppService.cs" />
     <Compile Include="Interfaces\IPecuaristaAppService.cs" />
@@ -67,6 +64,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Marfrig.Application.DTO\Marfrig.Application.DTO.csproj">
+      <Project>{dab28d33-2d72-4255-a824-3b081fba2865}</Project>
+      <Name>Marfrig.Application.DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Marfrig.Domain\Marfrig.Domain.csproj">
       <Project>{09619714-b522-4b10-8a1b-924809b10ddb}</Project>
       <Name>Marfrig.Domain</Name>

@@ -8,6 +8,7 @@ namespace Marfrig.Domain.Entities
     {
         public DateTime DataEntrega { get; set; }
         public int PecuaristaId { get; set; }
+        public bool Impressa { get; set; }
         public virtual Pecuarista Pecuarista { get; set; }
         public virtual ICollection<CompraGadoItem> CompraGadoItens { get; set; }
 
@@ -25,6 +26,9 @@ namespace Marfrig.Domain.Entities
                 podeSalvar = false;
 
             if (!NaoHaItensRepetidos())
+                podeSalvar = false;
+
+            if (!TodosItensSaoValidos())
                 podeSalvar = false;
 
             return podeSalvar; 
@@ -76,6 +80,25 @@ namespace Marfrig.Domain.Entities
             }
 
             return true;
+        }
+
+        public bool TodosItensSaoValidos()
+        {
+            if (CompraGadoItens == null)
+                return true;
+
+            var temItemInvalido = false;
+
+            foreach(var item in CompraGadoItens)
+            {
+                if(!item.PodeSalvar())
+                {
+                    AdicionarErrosValidacao(item.Validacoes);
+                    temItemInvalido = true;
+                }
+            }
+
+            return !temItemInvalido;
         }
     }
 }

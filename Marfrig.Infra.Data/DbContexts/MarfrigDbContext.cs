@@ -13,9 +13,10 @@ namespace Marfrig.Infra.Data.DbContexts
             Configuration.LazyLoadingEnabled = false;
         }
 
-        public DbSet<Pecuarista> Pecuaristas { get; set; }
-        public DbSet<Animal> Animais { get; set; }
-        public DbSet<CompraGado> ComprasGado { get; set; }
+        public virtual DbSet<Pecuarista> Pecuaristas { get; set; }
+        public virtual DbSet<Animal> Animais { get; set; }
+        public virtual DbSet<CompraGado> ComprasGado { get; set; }
+        public virtual DbSet<CompraGadoItem> ComprasGadoItem { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

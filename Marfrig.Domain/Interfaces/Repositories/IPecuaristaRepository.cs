@@ -7,5 +7,6 @@ namespace Marfrig.Domain.Interfaces.Repositories
     public interface IPecuaristaRepository
     {
         Task<IEnumerable<Pecuarista>> ObterPecuaristas();
+        Task<bool> Existe(int id);
     }
 }

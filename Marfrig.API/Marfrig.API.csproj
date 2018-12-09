@@ -130,7 +130,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnimalController.cs" />
-    <Compile Include="Controllers\CompraCadoController.cs" />
+    <Compile Include="Controllers\CompraGadoController.cs" />
     <Compile Include="Controllers\PecuaristaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -151,6 +151,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Marfrig.Application.DTO\Marfrig.Application.DTO.csproj">
+      <Project>{dab28d33-2d72-4255-a824-3b081fba2865}</Project>
+      <Name>Marfrig.Application.DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Marfrig.Application\Marfrig.Application.csproj">
       <Project>{1b07382f-dd5b-46ce-a7b2-b249787f8c00}</Project>
       <Name>Marfrig.Application</Name>

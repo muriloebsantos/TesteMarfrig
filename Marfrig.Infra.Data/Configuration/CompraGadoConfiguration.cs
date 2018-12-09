@@ -7,6 +7,7 @@ namespace Marfrig.Infra.Data.Configuration
         public CompraGadoConfiguration()
         {
             HasRequired(r => r.Pecuarista).WithMany().HasForeignKey(f => f.PecuaristaId);
+            Property(p => p.DataEntrega).HasColumnType("date");
         }
     }
 }

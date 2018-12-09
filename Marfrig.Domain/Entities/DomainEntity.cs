@@ -18,6 +18,11 @@ namespace Marfrig.Domain.Entities
             validacoes.Add(erro);
         }
 
+        protected void AdicionarErrosValidacao(IReadOnlyList<string> erros)
+        {
+            validacoes.AddRange(erros);
+        }
+
         public IReadOnlyList<string> Validacoes => validacoes;
     }
 }
