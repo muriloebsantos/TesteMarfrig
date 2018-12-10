@@ -82,9 +82,9 @@
                 </DataGrid>
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Label Content="Valor Total:" Height="30" FontWeight="Bold"/>
-                    <Label Content="{Binding ValorTotal, StringFormat=C, ConverterCulture=pt-BR}" Height="30"
-                           FontWeight="Bold" Foreground="Blue"/>
+                    <TextBlock Text="Valor Total:" Height="30" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding ValorTotal, StringFormat=C, ConverterCulture=pt-BR}" Height="30"
+                               FontWeight="Bold" Foreground="Blue" Margin="5,0,0,0"/>
                 </StackPanel>
 
             </Grid>

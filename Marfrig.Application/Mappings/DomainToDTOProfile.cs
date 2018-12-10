@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Marfrig.Application.DTO.ComprasGado;
 using Marfrig.Application.DTOs;
 using Marfrig.Application.DTOs.Animais;
 using Marfrig.Application.DTOs.ComprasGado;
@@ -18,6 +19,8 @@ namespace Marfrig.Application.Mappings
             CreateMap<CompraGado, CompraGadoInputDTO>();
             CreateMap<CompraGadoItem, CompraGadoItemInputDTO>();
             CreateMap<PagedResult<CompraGadoConsulta>, PagedResultDTO<CompraGadoConsultaDTO>>();
+            CreateMap<CompraGadoRelatorio, CompraGadoCabecalhoRelatorioDTO>();
+            CreateMap<CompraGadoItemRelatorio, CompraGadoItemRelatorioDTO>();
         }
     }
 }

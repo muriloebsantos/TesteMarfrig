@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marfrig.WPF", "Marfrig.WPF\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marfrig.Application.DTO", "Marfrig.Application.DTO\Marfrig.Application.DTO.csproj", "{DAB28D33-2D72-4255-A824-3B081FBA2865}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - UnitTests", "6 - UnitTests", "{CE1B104B-C90D-4E84-A71E-509F5C4476DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marfrig.Domain.Tests", "Marfrig.Domain.Tests\Marfrig.Domain.Tests.csproj", "{BA4712D0-B95A-43DF-A19C-D23FF971F6A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,10 @@ Global
 		{DAB28D33-2D72-4255-A824-3B081FBA2865}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAB28D33-2D72-4255-A824-3B081FBA2865}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAB28D33-2D72-4255-A824-3B081FBA2865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA4712D0-B95A-43DF-A19C-D23FF971F6A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA4712D0-B95A-43DF-A19C-D23FF971F6A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA4712D0-B95A-43DF-A19C-D23FF971F6A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA4712D0-B95A-43DF-A19C-D23FF971F6A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +83,7 @@ Global
 		{08B5E6B0-CE30-410F-A53D-F9C966672354} = {AE81FA3A-94E9-4C5F-8367-182730413773}
 		{BBE19B5E-B2FC-4CAD-9E1C-9AC486BE4E81} = {926ED232-F0EB-4D27-9662-9CFA3F85FB0B}
 		{DAB28D33-2D72-4255-A824-3B081FBA2865} = {F4892C48-806B-4DE9-853D-AF74ABE6CDB8}
+		{BA4712D0-B95A-43DF-A19C-D23FF971F6A3} = {CE1B104B-C90D-4E84-A71E-509F5C4476DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D65603CC-B8FB-4B69-BC75-273147204BE1}

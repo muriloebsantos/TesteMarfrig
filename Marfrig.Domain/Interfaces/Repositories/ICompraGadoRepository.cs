@@ -13,5 +13,6 @@ namespace Marfrig.Domain.Interfaces.Repositories
         Task Excluir(int id);
         Task<CompraGado> BuscarPorId(int id);
         Task<PagedResult<CompraGadoConsulta>> Buscar(FilterOptions options, int id, int pecuaristaId, DateTime? dataEntregaInicio, DateTime? dataEntregaFim);
+        Task<CompraGadoRelatorio> RelatorioCompra(int id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Marfrig.WPF.Services;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,6 +17,11 @@ namespace Marfrig.WPF
         public static MainWindow TelaPrincipal()
         {
             return System.Windows.Application.Current.MainWindow as MainWindow;
+        }
+
+        private async void Application_Startup(object sender, StartupEventArgs e)
+        {
+            await AutenticacaoService.Autenticar();
         }
     }
 }

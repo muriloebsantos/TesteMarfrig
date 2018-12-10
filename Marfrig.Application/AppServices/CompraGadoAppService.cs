@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Marfrig.Application.DTO.ComprasGado;
 using Marfrig.Application.DTOs;
 using Marfrig.Application.DTOs.ComprasGado;
 using Marfrig.Application.Exceptions;
@@ -8,6 +9,7 @@ using Marfrig.Domain.Interfaces.Repositories;
 using Marfrig.Domain.Interfaces.Services;
 using Marfrig.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Marfrig.Application.AppServices
@@ -88,6 +90,22 @@ namespace Marfrig.Application.AppServices
                 throw new NotFoundException("Compra de gado não encontrada");
 
             return await compraGadoService.Excluir(compraGado);
+        }
+
+        public async Task<CompraGadoRelatorioDTO> RelatorioCompra(int id)
+        {
+            var relatorioCompra = await compraGadoRepository.RelatorioCompra(id);
+            var relatorioDTO = new CompraGadoRelatorioDTO()
+            {
+                Cabecalho = Mapper.Map<CompraGadoCabecalhoRelatorioDTO>(relatorioCompra),
+                Itens = Mapper.Map<IEnumerable<CompraGadoItemRelatorioDTO>>(relatorioCompra.Itens)
+            };
+
+            var compraGado = await compraGadoRepository.BuscarPorId(id);
+            compraGado.Impressa = true;
+            await compraGadoService.AtualizarCompraDeGado(compraGado);
+
+            return relatorioDTO;
         }
     }
 }

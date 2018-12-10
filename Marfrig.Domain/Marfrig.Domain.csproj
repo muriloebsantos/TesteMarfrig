@@ -54,6 +54,8 @@
     <Compile Include="Models\FilterOptions.cs" />
     <Compile Include="Models\PagedResult.cs" />
     <Compile Include="Models\ReadModels\CompraGadoConsulta.cs" />
+    <Compile Include="Models\ReadModels\CompraGadoItemRelatorio.cs" />
+    <Compile Include="Models\ReadModels\CompraGadoRelatorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CompraGadoService.cs" />
   </ItemGroup>

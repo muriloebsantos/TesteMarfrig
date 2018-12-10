@@ -54,9 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animais\AnimalDTO.cs" />
+    <Compile Include="ComprasGado\CompraGadoCabecalhoRelatorioDTO.cs" />
     <Compile Include="ComprasGado\CompraGadoConsultaDTO.cs" />
     <Compile Include="ComprasGado\CompraGadoInputDTO.cs" />
     <Compile Include="ComprasGado\CompraGadoItemInputDTO.cs" />
+    <Compile Include="ComprasGado\CompraGadoItemRelatorioDTO.cs" />
+    <Compile Include="ComprasGado\CompraGadoRelatorioDTO.cs" />
     <Compile Include="PagedResultDTO.cs" />
     <Compile Include="Pecuaristas\PecuaristaDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -76,6 +79,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\Marfrig.Application.DTO.ComprasGado.CompraGadoCabecalhoRelatorioDTO.datasource" />
+    <None Include="Properties\DataSources\Marfrig.Application.DTO.ComprasGado.CompraGadoItemRelatorioDTO.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

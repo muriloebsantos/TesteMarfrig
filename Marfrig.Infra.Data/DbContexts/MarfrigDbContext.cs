@@ -7,7 +7,7 @@ namespace Marfrig.Infra.Data.DbContexts
 {
     internal class MarfrigDbContext : DbContext
     {
-        public MarfrigDbContext()
+        public MarfrigDbContext():base("MarfrigConnectionString")
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;

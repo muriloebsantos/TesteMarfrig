@@ -144,7 +144,7 @@ namespace Marfrig.WPF.ViewModels
             NotifyPropertyChanged("ProximoEnabled");
         }
 
-        private void AtualizarEstadoBotoesAcao()
+        public void AtualizarEstadoBotoesAcao()
         {
             NotifyPropertyChanged("ImprimirEnabled");
             NotifyPropertyChanged("AlterarEnabled");

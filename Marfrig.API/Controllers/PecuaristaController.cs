@@ -4,6 +4,7 @@ using System.Web.Http;
 
 namespace Marfrig.API.Controllers
 {
+    [Authorize]
     public class PecuaristaController : ApiController
     {
         private readonly IPecuaristaAppService pecuaristaAppService;

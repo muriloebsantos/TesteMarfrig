@@ -35,7 +35,7 @@ namespace Marfrig.Infra.Data.Repositories
                     var itemAtualizar = itensAntesDeSalvar.FirstOrDefault(i => i.Id == item.Id);
                     dbContext.Entry(itemAtualizar).CurrentValues.SetValues(item);
                 }
-                
+
             }
 
             foreach (var itemExcluir in itensExcluir)
@@ -98,7 +98,7 @@ namespace Marfrig.Infra.Data.Repositories
                 TotalRecords = qtdeRegistros,
                 Data = registros
             };
-            
+
             return pagedResult;
         }
 
@@ -120,6 +120,29 @@ namespace Marfrig.Infra.Data.Repositories
         {
             dbContext.ComprasGado.Add(compraGado);
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<CompraGadoRelatorio> RelatorioCompra(int id)
+        {
+            var compraGado = await dbContext.ComprasGado.Where(c => c.Id == id)
+                                                        .Select(c => new CompraGadoRelatorio
+                                                        {
+                                                            Id = c.Id,
+                                                            DataEntrega = c.DataEntrega,
+                                                            Pecuarista = c.Pecuarista.Nome
+                                                        }).FirstOrDefaultAsync();
+
+            var itens = await dbContext.ComprasGadoItem.Where(c => c.CompraGadoId == id)
+                                                        .Select(i => new CompraGadoItemRelatorio
+                                                        {
+                                                            Animal = i.Animal.Descricao,
+                                                            Preco = i.Preco,
+                                                            Quantidade = i.Quantidade
+                                                        }).ToListAsync();
+
+            compraGado.Itens = itens;
+
+            return compraGado;
         }
     }
 }

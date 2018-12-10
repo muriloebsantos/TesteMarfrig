@@ -106,6 +106,7 @@ namespace Marfrig.WPF.ViewModels
         {
             inputDto.CompraGadoItens.Remove(input);
             Itens.Remove(itemViewModel);
+            AtualizarTotal();
         }
 
         public CompraGadoCadastroItemViewModel InserirItem()

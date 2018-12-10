@@ -1,4 +1,5 @@
-﻿using Marfrig.Application.DTOs;
+﻿using Marfrig.Application.DTO.ComprasGado;
+using Marfrig.Application.DTOs;
 using Marfrig.Application.DTOs.ComprasGado;
 using Marfrig.WPF.ViewModels;
 using System;
@@ -83,6 +84,19 @@ namespace Marfrig.WPF.Services
                 compraGado = await response.Content.ReadAsAsync<CompraGadoInputDTO>();
             }
            
+            return compraGado;
+        }
+
+        public async Task<CompraGadoRelatorioDTO> RelatorioCompra(int id)
+        {
+            CompraGadoRelatorioDTO compraGado = null;
+            HttpResponseMessage response = await client.GetAsync($"api/RelatorioCompra/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                compraGado = await response.Content.ReadAsAsync<CompraGadoRelatorioDTO>();
+            }
+
             return compraGado;
         }
     }

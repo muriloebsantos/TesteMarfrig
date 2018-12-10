@@ -158,5 +158,30 @@ namespace Marfrig.WPF
                 progressRing.IsActive = false;
             }
         }
+
+        private async void btnImprimir_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                progressRing.IsActive = true;
+                btnImprimir.IsEnabled = false;
+
+                var relatorioDTO = await new CompraGadoService().RelatorioCompra(viewModel.CompraGadoSelecionada.Id);
+
+                viewModel.CompraGadoSelecionada.Impressa = true;
+                viewModel.AtualizarEstadoBotoesAcao();
+
+                App.TelaPrincipal().AdicionarTab("Impressão de Compra", new RelatorioCompraPage(relatorioDTO));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Erro ao carregar compra para impressão", "Erro", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            }
+            finally
+            {
+                btnImprimir.IsEnabled = true;
+                progressRing.IsActive = false;
+            }
+        }
     }
 }

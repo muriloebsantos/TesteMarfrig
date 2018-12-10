@@ -104,7 +104,7 @@ namespace Marfrig.WPF
 
         private void btnExcluir_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.ItemSelecionado.Remover();
+            viewModel.ItemSelecionado?.Remover();
         }
     }
 }

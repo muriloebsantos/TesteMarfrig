@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace Marfrig.API.Controllers
 {
+    [Authorize]
     public class CompraGadoController : ApiController
     {
         private readonly ICompraGadoAppService compraGadoAppService;

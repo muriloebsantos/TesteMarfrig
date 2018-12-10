@@ -18,8 +18,8 @@
         </Grid.RowDefinitions>
         <mah:ProgressRing x:Name="progressRing" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Panel.ZIndex="9999" Width="100" />
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Content="Imprimir" Width="100" Height="30" Margin="0,0,5,0"
-                    IsEnabled="{Binding ImprimirEnabled}"/>
+            <Button x:Name="btnImprimir" Content="Imprimir" Width="100" Height="30" Margin="0,0,5,0"
+                    IsEnabled="{Binding ImprimirEnabled}" Click="btnImprimir_Click"/>
             <Button x:Name="btnAdicionar" Content="Adicionar" Width="100" Height="30" Margin="0,0,5,0"
                     Click="btnAdicionar_Click"/>
             <Button x:Name="btnAlterar" Content="Alterar" Width="100" Height="30" Margin="0,0,5,0"
@@ -37,9 +37,8 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*" />
-                <ColumnDefinition Width="30*" />
-                <ColumnDefinition Width="20*" />
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="250" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Id" Margin="90,0,0,0"/>
@@ -59,7 +58,7 @@
             <TextBox Grid.Row="1" Grid.Column="1" Margin="60,5,0,0"
                      Text="{Binding DataFim, Mode=TwoWay, StringFormat=dd/MM/yyyy, ConverterCulture=pt-BR, TargetNullValue=''}"/>
 
-            <Button x:Name="btnPesquisar" Grid.Row="2" Content="Pesquisar" Grid.ColumnSpan="2" Width="100" HorizontalAlignment="Center" 
+            <Button x:Name="btnPesquisar" Grid.Row="2" Content="Pesquisar" Grid.ColumnSpan="2" Width="150" HorizontalAlignment="Center"    
                                  Margin="0,5,0,0" Click="btnPesquisar_Click"/>
 
         </Grid>
